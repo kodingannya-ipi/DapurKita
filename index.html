@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DapurKita — Koleksi Resep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="DapurKita beranda"><span class="brand-mark">✳</span><span>Dapur<span>Kita</span></span></a>
+      <div class="side-label">JELAJAHI</div>
+      <nav class="side-nav" aria-label="Navigasi utama">
+        <button class="nav-link active" data-view="home"><span class="nav-icon">⌂</span>Beranda</button>
+        <button class="nav-link" data-view="browse"><span class="nav-icon">⌕</span>Jelajahi Resep</button>
+        <button class="nav-link" data-view="favorites"><span class="nav-icon">♡</span>Favorit <span class="nav-count" id="favoriteCount">0</span></button>
+        <button class="nav-link" data-view="my-recipes"><span class="nav-icon">▤</span>Resep Saya</button>
+      </nav>
+      <div class="sidebar-tip">
+        <span class="tip-icon">✦</span>
+        <strong>Masak sesuatu yang spesial.</strong>
+        <p>Temukan ide baru dari dapur komunitas.</p>
+        <button class="button button-dark button-full" id="sidebarAddBtn">＋ Tambah resep</button>
+      </div>
+      <div class="sidebar-footer"><span class="avatar avatar-small">DK</span><div><strong>Pengunjung</strong><small>Home cook</small></div><span class="dots">•••</span></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Buka menu">☰</button>
+        <div class="mobile-brand">Dapur<span>Kita</span></div>
+        <label class="search-box" for="searchInput"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Cari resep, bahan makanan, dan lainnya..." autocomplete="off"><kbd>⌘ K</kbd></label>
+        <button class="profile-button" id="profileButton"><span class="avatar">DK</span><span class="profile-name">Dapur Kreatif</span><span class="chevron">⌄</span></button>
+      </header>
+
+      <section class="page-content">
+        <section class="welcome-row">
+          <div><p class="eyebrow">SELAMAT DATANG DI DAPURKITA</p><h1 id="pageTitle">Masak enak, <span>mulai dari sini.</span></h1><p class="welcome-copy" id="pageSubtitle">Kumpulan inspirasi resep untuk menemani setiap momen di rumah.</p></div>
+          <button class="button button-primary" id="heroAddBtn"><span>＋</span> Bagikan resep</button>
+        </section>
+
+        <section class="hero-grid" id="heroBanners" aria-label="Resep pilihan">
+          <button class="feature-card feature-peach" data-feature="Nasi Goreng Kampung"><span class="feature-tag">FAVORIT KOMUNITAS</span><span class="feature-title">Rasa rumahan,<br>selalu bikin rindu.</span><span class="feature-link">Lihat resep <b>↗</b></span><span class="feature-art art-rice">🍳</span></button>
+          <button class="feature-card feature-lilac" data-feature="Pancake Buah"><span class="feature-tag">IDE SARAPAN</span><span class="feature-title">Mulai hari dengan<br>sesuatu yang manis.</span><span class="feature-link">Lihat resep <b>↗</b></span><span class="feature-art art-pancake">🥞</span></button>
+          <button class="feature-card feature-green" data-feature="Sup Jagung Hangat"><span class="feature-tag">HANGAT & NYAMAN</span><span class="feature-title">Semangkuk hangat<br>untuk hari santai.</span><span class="feature-link">Lihat resep <b>↗</b></span><span class="feature-art art-soup">🍲</span></button>
+        </section>
+
+        <section class="toolbar-section">
+          <div class="section-heading"><div><p class="eyebrow">PILIH SESUAI SELERA</p><h2>Kategori resep</h2></div><button class="text-button" id="clearFilters">Lihat semua <span>→</span></button></div>
+          <div class="category-pills" id="categoryPills">
+            <button class="category-pill active" data-category="Semua">✦ <span>Semua</span></button>
+            <button class="category-pill" data-category="Makanan Utama">🍛 <span>Makanan utama</span></button>
+            <button class="category-pill" data-category="Camilan">🥐 <span>Camilan</span></button>
+            <button class="category-pill" data-category="Dessert">🍰 <span>Dessert</span></button>
+            <button class="category-pill" data-category="Minuman">🥤 <span>Minuman</span></button>
+            <button class="category-pill" data-category="Sup">🍲 <span>Sup</span></button>
+          </div>
+        </section>
+
+        <section class="recipes-section">
+          <div class="section-heading recipes-heading"><div><p class="eyebrow" id="recipesEyebrow">DIKURASI UNTUKMU</p><h2 id="recipesTitle">Resep pilihan hari ini <span class="heading-spark">✳</span></h2></div><div class="sort-wrap"><span>Urutkan:</span><select id="sortSelect" aria-label="Urutkan resep"><option value="featured">Pilihan</option><option value="az">Nama A–Z</option><option value="newest">Terbaru</option></select></div></div>
+          <div class="recipe-grid" id="recipeGrid" aria-live="polite"></div>
+          <div class="empty-state hidden" id="emptyState"><span>🥣</span><h3>Resepnya belum ditemukan</h3><p>Coba kata kunci atau kategori lain, ya.</p><button class="button button-dark" id="resetEmpty">Tampilkan semua resep</button></div>
+          <div class="load-more-wrap"><button class="button button-outline" id="loadMoreBtn">Tampilkan lebih banyak <span>↓</span></button></div>
+        </section>
+        <footer class="page-footer"><span>✳ DapurKita</span><span>Dibuat dengan rasa ingin tahu dan sedikit garam.</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="recipeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal modal-recipe">
+      <button class="modal-close" data-close="recipeModal" aria-label="Tutup">×</button>
+      <div class="detail-image" id="detailImage"><span>🍽️</span></div>
+      <div class="detail-body"><div class="detail-meta"><span class="mini-tag" id="detailCategory">Kategori</span><span id="detailTime">◷ 20 menit</span></div><h2 id="modalTitle">Nama Resep</h2><p id="detailDescription"></p><div class="detail-columns"><div><h3>Bahan-bahan</h3><ul id="detailIngredients"></ul></div><div><h3>Langkah memasak</h3><ol id="detailSteps"></ol></div></div><div class="detail-actions"><button class="button button-outline" id="detailFavorite">♡ Simpan favorit</button><button class="button button-primary" data-close="recipeModal">Selesai</button></div></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="addModal" role="dialog" aria-modal="true" aria-labelledby="addModalTitle">
+    <div class="modal modal-form">
+      <button class="modal-close" data-close="addModal" aria-label="Tutup">×</button>
+      <div class="form-header"><span class="form-icon">✳</span><p class="eyebrow">DARI DAPURMU KE KITA</p><h2 id="addModalTitle">Bagikan resep baru</h2><p>Punya resep andalan? Yuk, simpan di koleksi DapurKita.</p></div>
+      <form id="recipeForm" novalidate>
+        <div class="form-field"><label for="inputNamaResep">Nama resep <span>*</span></label><input id="inputNamaResep" name="recipeName" placeholder="Contoh: Ayam kecap rumahan" required minlength="3"><small class="field-error" id="nameError"></small></div>
+        <div class="form-row">
+          <div class="form-field"><label for="inputKategori">Kategori <span>*</span></label><select id="inputKategori" name="category" required><option value="">Pilih kategori</option><option>Makanan Utama</option><option>Camilan</option><option>Dessert</option><option>Minuman</option><option>Sup</option></select><small class="field-error" id="categoryError"></small></div>
+          <div class="form-field"><label for="inputWaktu">Waktu (menit) <span>*</span></label><input id="inputWaktu" name="time" type="number" min="1" max="600" placeholder="30" required><small class="field-error" id="timeError"></small></div>
+        </div>
+        <div class="form-field"><label for="inputFoto">URL foto makanan <span class="optional">(opsional)</span></label><input id="inputFoto" name="photo" type="url" placeholder="https://contoh.com/foto.jpg"><small class="field-hint">Gunakan tautan gambar langsung jika tersedia.</small><small class="field-error" id="photoError"></small></div>
+        <div class="form-field"><label for="inputDeskripsi">Deskripsi singkat <span>*</span></label><textarea id="inputDeskripsi" name="description" rows="2" minlength="10" placeholder="Ceritakan sedikit tentang resep ini..." required></textarea><small class="field-error" id="descriptionError"></small></div>
+        <div class="form-field"><label for="inputBahan">Bahan-bahan <span>*</span></label><textarea id="inputBahan" name="ingredients" rows="3" placeholder="1. 2 butir telur&#10;2. 1 siung bawang putih" required></textarea><small class="field-hint">Pisahkan setiap bahan dengan baris baru.</small><small class="field-error" id="ingredientsError"></small></div>
+        <div class="form-field"><label for="inputLangkah">Langkah memasak <span>*</span></label><textarea id="inputLangkah" name="steps" rows="3" placeholder="1. Siapkan semua bahan&#10;2. Panaskan wajan..." required></textarea><small class="field-hint">Tulis setiap langkah di baris baru.</small><small class="field-error" id="stepsError"></small></div>
+        <div class="form-actions"><button type="button" class="button button-outline" data-close="addModal">Batal</button><button type="submit" class="button button-primary">Simpan resep <span>↗</span></button></div>
+        <p class="form-note">Resep disimpan di browser ini menggunakan localStorage.</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
